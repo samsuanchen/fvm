@@ -1,5 +1,15 @@
-# fvm -- Yet Another Forth Virtual Machine
+# YAFVM -- Yet Another Forth Virtual Machine on Arduino
 ### samsuanchen@gmail.com & derek@wifiboy.org
+
+## Abstract
+
+	Having seen https://github.com/mikaelpatel/Arduino-FVM/, we provide
+	yet another Arduino FVM, an alternative Forth Virtual Machine on Arduino.
+	Extending a little bit to an arduino code, for example the led blinking, 
+	a useful virtural machine will be activated in the same time.
+	So that, via arduino IDE console, we could enter simple commands to check, test, 
+	even change the features of the arduino code. This article is trying to
+	describe, by examples, how simple we could use this virtural machine.
 
 ## 摘要
 
@@ -33,7 +43,7 @@
 ## 範例02 【led 閃 10 次】 example02_blink_10_times.ino
 
 為增加一點變化, 我們可宣告一個 預設為 10 的 變數 times。 閃 led 前, 先檢視 times 若為 0 , 就不再閃。
-led 每閃 1 次, 變數 times 遞減 1。 閃 10 次之後, times 就會變為 0。
+led 每閃 1 次, 變數 times 遞減 1。 閃 10 次之後, times 就會變為 0。因此, 這程式就會閃 led 10 次。
 
 	// example02_blink_10_times.ino derived from http://www.arduino.cc/en/Tutorial/Blink
 
@@ -94,4 +104,9 @@ IDE console 的輸入格, 我們就可隨時下 虛擬機 F 的指令, 例如: "
 	  F.update();                            // ##### 5. run virtual machine F
 	}
 
+
+其實, 任何程式要讓他產生較多的變化, 最直接的方法就是增加較多的變數, 用以 檢視狀態/控制效果。當這些變數
+大量增加時, 要想隨時能 檢視/控制 這些變數, 就自然會大大增加傳統的方式 撰寫/修改 程式的複雜度與困難度。
+照此範例, 啟動了同步運行的 FVM 並將變數儲存位址傳給 FVM , 馬上就可大大簡化 撰寫/修改 程式的複雜度與
+困難度。對入門的初學者而言尤其是這樣。
 
