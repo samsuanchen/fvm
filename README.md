@@ -26,6 +26,8 @@
 
 此程式實際上就是 arduino 所提供 led 閃不停 的範例 blink.ino。
 
+	// example01_blink_forever.ino derived from http://www.arduino.cc/en/Tutorial/Blink
+
 	#define LED 16                           // LED pin gpio #
 
 	void setup() { // this function runs once when we press reset or power the board
@@ -106,7 +108,6 @@ IDE console 的輸入格, 我們就可隨時下 虛擬機 F 的指令, 例如: "
 
 
 其實, 任何程式要讓他產生較多的變化, 最直接的方法就是增加較多的變數, 用以 檢視狀態/控制效果。當這些變數
-大量增加時, 要想隨時能 檢視/控制 這些變數, 就自然會大大增加傳統的方式 撰寫/修改 程式的複雜度與困難度。
+大量增加時, 要想隨時能 檢視/控制 這些變數, 就自然會大大增加傳統方式 撰寫/修改 程式的複雜度與困難度。
 照此範例, 啟動了同步運行的 FVM 並將變數儲存位址傳給 FVM , 馬上就可大大簡化 撰寫/修改 程式的複雜度與
 困難度。對入門的初學者而言尤其是這樣。
-
