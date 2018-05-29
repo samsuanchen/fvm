@@ -16,12 +16,13 @@ void setup() { // this function runs once when we press reset or power the board
 
 void loop() { // this function runs over and over again forever
 
+  F.update();                            // ##### 5. run virtual machine F
+
   if( ! times ) return;                  // no more blinking if times is 0
+  times--;
 
   digitalWrite(LED, LOW);                // turn LED on (LOW is the voltage level)
   delay(1000);                           // wait for a second
   digitalWrite(LED, HIGH);               // turn LED off by making the voltage HIGH
   delay(1000);                           // wait for a second
-
-  F.update();                            // ##### 5. run virtual machine F
 }

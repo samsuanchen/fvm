@@ -45,7 +45,7 @@
 ## 範例02 【led 閃 10 次】 example02_blink_10_times.ino
 
 為增加一點變化, 我們可宣告一個 預設為 10 的 變數 times。 閃 led 前, 先檢視 times 若為 0 , 就不再閃。
-led 每閃 1 次, 變數 times 遞減 1。 閃 10 次之後, times 就會變為 0。因此, 這程式就會閃 led 10 次。
+led 每閃 1 次, 變數 times 遞減 1。 閃 10 次之後, times 就會變為 0。因此, 這程式就會準確地閃 led 10 次。
 
 	// example02_blink_10_times.ino derived from http://www.arduino.cc/en/Tutorial/Blink
 
@@ -69,20 +69,21 @@ led 每閃 1 次, 變數 times 遞減 1。 閃 10 次之後, times 就會變為 
 	}
 
 
-## 範例03 【隨時叫 led 閃幾次】 example03_blink_given_times.ino
+## 範例03 【隨時叫 led 閃幾次】 example03_blink_given_number_of_times.ino
 
 範例02 叫 led 閃 10 次, 其中變數 times 的數值預設為 10, 是控制 led 閃 10 次的關鍵。若隨時能檢視 times 
 的數值, 就知道程式的執行進度, 知道 led 還有幾次要閃。若隨時能改變 times 的數值, 我們就能隨時叫 led 閃
-幾次了。當然, 我們可以修改程式, 在讀取 times 數值之後叫 led 閃。在此範, 我們嘗試另類方案, 增加幾行指令, 
+幾次了。當然, 我們可以修改程式, 在讀取 times 數值之後叫 led 閃。在此範例, 我們嘗試另類方案, 增加幾行指令, 
 啟動一個同步運行的 FVM 虛擬機 F, 並將變數 times 的儲存位址設為 虛擬機 F 的常數 n。 之後, 在 arduino
 IDE console 的輸入格, 我們就可隨時下 虛擬機 F 的指令, 例如: "n ?" 檢視 led 還有幾次要閃; "5 n !"
 設定 led 還要閃 5 次。
 
-	// example03_blink_given_times.ino derived from http://www.arduino.cc/en/Tutorial/Blink
+	// example03_blink_given_number_of_times.ino derived from http://www.arduino.cc/en/Tutorial/Blink
 
 	#define LED 16                           // LED pin gpio #
 
 	int times = 10;                          // blink led 10 times initially
+	times--;                                 // decrease times by 1
 
 	# include <fvm01.h>                      // ##### 1. load FVM the Forth virtual machine
 	FVM F = FVM();                           // ##### 2. define F as an instence of FVM
@@ -96,18 +97,18 @@ IDE console 的輸入格, 我們就可隨時下 虛擬機 F 的指令, 例如: "
 
 	void loop() { // this function runs over and over again forever
 
+	  F.update();                            // ##### 5. run virtual machine F
+
 	  if( ! times ) return;                  // no more blinking if times is 0
 
 	  digitalWrite(LED, LOW);                // turn LED on (LOW is the voltage level)
 	  delay(1000);                           // wait for a second
 	  digitalWrite(LED, HIGH);               // turn LED off by making the voltage HIGH
 	  delay(1000);                           // wait for a second
-
-	  F.update();                            // ##### 5. run virtual machine F
 	}
 
 
 其實, 任何程式要讓他產生較多的變化, 最直接的方法就是增加較多的變數, 用以 檢視狀態/控制效果。當這些變數
 大量增加時, 要想隨時能 檢視/控制 這些變數, 就自然會大大增加傳統方式 撰寫/修改 程式的複雜度與困難度。
-照此範例, 啟動了同步運行的 FVM 並將變數儲存位址傳給 FVM , 馬上就可大大簡化 撰寫/修改 程式的複雜度與
+照此範例, 啟動了同步運行的 FVM 並將變數儲存位址傳給 FVM , 可大大簡化 撰寫/修改 程式的複雜度與
 困難度。對入門的初學者而言尤其是這樣。
