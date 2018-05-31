@@ -55,7 +55,7 @@ void loop() { // this function runs over and over again forever
 編碼載入。
 ![compile_and_upload](pic103_compile_and_upload.jpg)
 
-就會看到 led 開始閃。
+載入完成, 就會看到 led 開始閃了。
 <div align=center><img width="50%" src="pic000_wifiboy_esp32_blink.jpg"/></div>
 
 ## 範例02 【led 閃 10 次】 example02_blink_10_times.ino
