@@ -53,7 +53,7 @@ void loop() { // this function runs over and over again forever
 ![select_com_port](pic102_select_com_port.jpg)
 
 編碼載入, 就會看到 led 開始閃。
-![compile_and_upload](pic103_compile_and_upload)
+![compile_and_upload](pic103_compile_and_upload.jpg)
 
 ## 範例02 【led 閃 10 次】 example02_blink_10_times.ino
 
