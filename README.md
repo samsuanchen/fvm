@@ -82,7 +82,7 @@ led 每閃 1 次, 變數 times 遞減 1。 閃 10 次之後, times 就會變為 
 	#define LED 16                           // LED pin gpio #
 	int times = 10;                          // blink led 10 times initially
 
-                                                 // ##### 0. Crtl+Shift+M open Serial Port Console
+	                                         // ##### 0. Crtl+Shift+M open Serial Port Console
 
 	# include <fvm01.h>                      // ##### 1. load FVM the Forth virtual machine
 	FVM F = FVM();                           // ##### 2. define F as an instence of FVM
@@ -121,7 +121,7 @@ console 同時顯示還有幾次要閃的倒數。
 	#define LED 16                           // LED pin gpio #
 	int times = 10;                          // blink led 10 times initially
 
-                                                 // ##### 0. Crtl+Shift+M open Serial Port Console
+	                                         // ##### 0. Crtl+Shift+M open Serial Port Console
 
 	# include <fvm01.h>                      // ##### 1. load FVM the Forth virtual machine
 	FVM F = FVM();                           // ##### 2. define F as an instence of FVM
@@ -132,8 +132,8 @@ console 同時顯示還有幾次要閃的倒數。
 	  pinMode(LED, OUTPUT);                  // initialize digital pin LED as an output device.
 
 	  F.init( 115200 );                      // ##### 4. init virtual machine F, baud rate 115200
-          F.newPrimitive( "n!", setTimes );      // ##### 5. let  setTimes as the new command n! in F
-          F.newPrimitive( "n?", showTimes);      // #####    let showTimes as the new command n? in F
+	  F.newPrimitive( "n!", setTimes );      // ##### 5. let  setTimes as the new command n! in F
+	  F.newPrimitive( "n?", showTimes);      // #####    let showTimes as the new command n? in F
 	}
 
 	void loop() { // this function runs over and over again forever
