@@ -1,0 +1,261 @@
+
+word_set.cpp(0023): // word set 0 ( handlers of different word types and programming control flows forth words )
+word_set.cpp(0025): // W000 (con) ( -- a ) address of constant type handler _doCon.
+word_set.cpp(0029): // W001 (val) ( -- a ) address of value type handler _doVal.
+word_set.cpp(0033): // W002 (var) ( -- a ) address of variable type handler _doVar.
+word_set.cpp(0037): // W003 (col) ( -- )( -- w ip ) address of colon type handler _doCol.
+word_set.cpp(0041): // W004 (;) ( -- )( w ip -- ) end of colon type word definition (pop IP from return stack).
+word_set.cpp(0046): // W005 exit ( -- )( w ip -- ) exit from colon type word definition (pop IP from return stack).
+word_set.cpp(0050): // W006 (lit) ( -- n ) number in the code cell pointed by IP.
+word_set.cpp(0054): // W007 (str) ( -- addr ) string addr in the code cell pointed by IP.
+word_set.cpp(0058): // W008 (for) ( n -- )( -- n ) push n to return stack as loop counter.
+word_set.cpp(0062): // W009 (next) ( -- )( n -- n-1 | ) decreases loop counter n, branch back relatively to the word after (for) if n>0.
+word_set.cpp(0066): // W00a (if) ( flag -- ) branch forward relatively to the word after (else) or (then) if flag==0.
+word_set.cpp(0070): // W00b (else) ( -- ) branch forward relatively to the word after (then).
+word_set.cpp(0074): // W00c (then) ( -- ) end of the if-then or the if-else-then control flow.
+word_set.cpp(0078): // W00d (begin) ( -- ) begin of the begin-again, begin-until, or begin-while-repeat control flows.
+word_set.cpp(0082): // W00e (again) ( -- ) branch backward relatively to the word after (begin).
+word_set.cpp(0086): // W00f (until) ( flag -- ) branch backward relatively to the word after (begin) if flag==0.
+word_set.cpp(0090): // W010 (while) ( flag -- ) branch foreward relatively to the word after (repeat) if flag==0.
+word_set.cpp(0094): // W011 (repeat) ( -- ) branch backward relatively to the word after (begin).
+word_set.cpp(0098): // W012 (to) ( n -- ) store n to value type word which is in next code cell pointer by IP.
+word_set.cpp(0102): // W013 constant <name> ( n -- ) define constant type word of given name by n.
+word_set.cpp(0108): // W014 value <name> ( n -- ) define value type word of given name by n.
+word_set.cpp(0114): // W015 to <name> ( n -- ) store number to the value type word of given name.
+word_set.cpp(0132): // W016 variable <name> ( -- ) define variable type word of given name.
+word_set.cpp(0137): // W017 ] ( -- ) enter compiling state.
+word_set.cpp(0142): // W018 [ ( -- ) leave compiling state.
+word_set.cpp(0147): // W019 : <name> ( -- ) define colon type word of given name.
+word_set.cpp(0153): // W01a ; ( -- ) end of colon type word definition.
+word_set.cpp(0160): // W01b compile ( -- ) compile the forth word in the code cell pointed by IP.
+word_set.cpp(0164): // W01c here ( -- addr ) end of compiled code.
+word_set.cpp(0169): // W01d comma ( n -- ) compile given number.
+word_set.cpp(0176): // W01e >r ( n -- )( -- n ) push number onto return stack.
+word_set.cpp(0181): // W01f r@ ( -- n )( n -- n ) top number of return stack.
+word_set.cpp(0186): // W020 r> ( -- n )( n -- ) pop number from return stack.
+word_set.cpp(0191): // W021 - ( a b -- a-b ) difference of 2 integer numbers, a-b.
+word_set.cpp(0196): // W022 cell/ ( n -- n/4 ) divide given integer number by 2.
+word_set.cpp(0201): // W023 ! ( n a -- ) store 32-bit number into given memory address.
+word_set.cpp(0206): // W024 over ( n1 n0  -- n1 n0 n1 ) copy the next number on top to data stack.
+word_set.cpp(0211): // W025 ( n1 n0  -- n0 n1 ) swap top 2 numbers of data stack.
+word_set.cpp(0216): // W026 if ( -- a ) begin TRUE-part control flow (until "else" or "then").
+word_set.cpp(0221): // W027 else ( a -- a' ) begin FALSE-part control flow (until "then").
+word_set.cpp(0227): // W028 then ( a -- ) end of TRUE-part or FALSE-part control flow.
+word_set.cpp(0232): // W029 for ( -- a ) begin of counted loop control flow (until "next").
+word_set.cpp(0237): // W02a next ( a -- ) end of counted loop control flow.
+word_set.cpp(0242): // W02b begin ( -- a ) begin of loop control flow (until "again", "until", or "while").
+word_set.cpp(0247): // W02c again ( a -- ) end of infinite loop control flow.
+word_set.cpp(0252): // W02d until ( a -- ) end of loop control flow.
+word_set.cpp(0257): // W02e while ( a -- a b ) begin TRUE-part loop control flow (until "repeat").
+word_set.cpp(0262): // W02f repeat ( a b -- ) end of TRUE-part loop control flow.
+word_set.cpp(0268): // W030 immediate ( -- ) set the last defined forth word as immediate type.
+word_set.cpp(0273): // W031 compile-only ( -- ) set the last defined word as compile-only type.
+word_set.cpp(0278): // W032 hidden ( -- ) set the last defined word as hidden type.
+word_set.cpp(0283): // W033 $" <string>" ( -- nStr ) create nString or compile nString.
+word_set.cpp(0291): // W034 ( <string>) ( -- ) ignore string delimited by right parenthesis.
+word_set.cpp(0296): // W035 literal ( n --  ) compile literal n.
+word_set.cpp(0301): // W036 ? ( addr -- ) print 32-bit integer at given memory address.
+word_set.cpp(0306): // W037 last ( -- addr ) in given address, pointer to the forth word just created (may not in vocabulary yet).
+word_set.cpp(0311): // W038 <# ( i -- i ) begin to convert integer to digits string.
+word_set.cpp(0316): // W039 hold ( char -- ) push given char to digits string (may be ',').
+word_set.cpp(0321): // W03a # ( i -- i/b ) convert i%b to a digit, push it to digits string.
+word_set.cpp(0327): // W03b #s ( i -- ) convert i to digits, push them to digits string.
+word_set.cpp(0332): // W03c #> ( -- nStr ) end of number conversion, push the digits string onto data stack.
+
+word_set.cpp(0337): // word set 1 ( number conversion base, memory access, printing, and floating number arithmetic forth words )
+word_set.cpp(0339): // W100 binary ( -- ) set number conversion base = 2.
+word_set.cpp(0344): // W101 octal ( -- ) set number conversion base = 8.
+word_set.cpp(0349): // W102 decimal ( -- ) set number conversion base = 10.
+word_set.cpp(0354): // W103 hex ( -- ) set number conversion base = 16.
+word_set.cpp(0359): // W104 base ( -- addr ) address of number conversion base.
+word_set.cpp(0364): // W106 @ ( addr -- n ) fetch 32-bit number from given memory address.
+word_set.cpp(0369): // W107 c! ( c addr -- ) store 8-bit number into given memory address.
+word_set.cpp(0374): // W108 c@ ( a -- c ) fetch 8-bit char from given memory address.
+word_set.cpp(0379): // W109 . ( n -- ) print given integer number and a space.
+word_set.cpp(0384): // W10a .r ( n m -- ) print given integer number right aligned in m-char wide (fill leading spaces if needed).
+word_set.cpp(0389): // W10b .0r ( n m -- ) print given integer number right aligned in m-char wide (fill leading '0' if needed).
+word_set.cpp(0394): // W10c f. ( f -- ) print given floating number and a space.
+word_set.cpp(0399): // W10d >float ( i -- f ) convert number from integer to float.
+word_set.cpp(0404): // W10e float> ( f -- i ) convert number from float to integer.
+word_set.cpp(0409): // W10f floor ( f -- f' ) the largest integer float value not greater than given floating number.
+word_set.cpp(0414): // W110 ceil ( f -- f' ) the smallest integer float not less than given floating number.
+word_set.cpp(0419): // W111 sin ( f -- sin(f) ) sine value of angle (given floating number expressed in radians).
+word_set.cpp(0424): // W112 cos ( f -- cos(f) ) cosine value of angle (given floating number expressed in radians).
+word_set.cpp(0429): // W113 exp ( f -- exp(f) ) exponential value of given floating number.
+word_set.cpp(0434): // W114 pow ( x y -- pow(x,y) ) raise given floating number x to fractional power y.
+word_set.cpp(0439): // W115 sqrt ( f -- sqrt(f) ) square root of given floating number.
+word_set.cpp(0444): // W116 tan ( f -- tan(f) ) tangent of an angle (given floating number expressed in radians).
+word_set.cpp(0449): // W117 atan ( x -- atan(x) ) arc tangent (in radians) of given floating number.
+word_set.cpp(0454): // W118 atan2 ( y x -- tan2(y,x) ) arc tangent of 2 floating numbers y and x, y/x.
+word_set.cpp(0459): // W119 f+ ( x y -- x+y ) sum of 2 floating numbers, x+y.
+word_set.cpp(0464): // W11a f- ( x y -- x-y ) difference of 2 floating numbers, x-y.
+word_set.cpp(0469): // W11b f* ( x y -- x*y ) product of 2 floating numbers, x*y.
+word_set.cpp(0474): // W11c f/ ( x y -- x/y ) quotient of 2 floating numbers, x/y.
+word_set.cpp(0479): // W11d f% ( x y -- x%y ) remainder of 2 floating numbers, x%y.
+word_set.cpp(0484): // W11e fAbs ( x -- abs(x) ) absolute value of given floating number.
+word_set.cpp(0489): // W11f log ( x -- log(x) ) natural logarithm of given floating number.
+word_set.cpp(0494): // W120 log10 ( x -- log10(x) ) logarithm of given floating number to base 10.
+
+word_set.cpp(0509): // word set 2 ( integer number arithmetic, stack operation, bit-wise operation, and comparison forth words )
+word_set.cpp(0511): // W200 + ( a b -- a+b ) sum of 2 integer numbers, a+b.
+word_set.cpp(0516): // W201 * ( a b -- a*b ) product of 2 integer numbers, a*b.
+word_set.cpp(0521): // W202 / ( a b -- a/b ) quotient of 2 integer numbers, a/b.
+word_set.cpp(0526): // W203 mod ( a b -- a%b ) remainder of 2 integer numbers, a%b.
+word_set.cpp(0531): // W204 negate ( n -- -n ) negative value of given integer number.
+word_set.cpp(0536): // W205 abs ( n -- abs(n) ) absolute value of given integer number.
+word_set.cpp(0541): // W206 max ( a b -- max(a,b) ) maximum value of 2 integer numbers a and b,
+word_set.cpp(0546): // W207 min ( a b -- min(a,b) ) minimum value of 2 integer numbers a and b,
+word_set.cpp(0551): // W208 ** ( a b -- a**b ) raise given integer number to a integer power.
+word_set.cpp(0556): // W209 iSqrt ( v -- v**.5 ) square root of given integer number.
+word_set.cpp(0561): // W20a 1+ ( n -- n+1 ) increase given integer number by 1.
+word_set.cpp(0566): // W20b 2+ ( n -- n+2 ) increase given integer number by 2.
+word_set.cpp(0571): // W20c cell+ ( n -- n+4 ) increase given integer number by 4.
+word_set.cpp(0576): // W20d 1- ( n -- n-1 ) decrease given integer number by 1.
+word_set.cpp(0581): // W20e 2- ( n -- n-2 ) decrease given integer number by 2.
+word_set.cpp(0586): // W20f cell- ( n -- n-4 ) decrease given integer number by 4.
+word_set.cpp(0591): // W210 2* ( n -- n*2 ) multiply given integer number by 2.
+word_set.cpp(0596): // W211 cells ( n -- n*4 ) multiply given integer number by 4.
+word_set.cpp(0601): // W212 2/ ( n -- n/2 ) divide given integer number by 2.
+word_set.cpp(0606): // W214 dup ( n -- n n ) copy the top of data stack.
+word_set.cpp(0611): // W215 pick ( ni .. n1 n0 i -- ni .. n1 n0 ni ) copy the top i-th of data stack.
+word_set.cpp(0616): // W216 ?dup ( n -- n n | 0 ) copy the top of data stack if the top is not 0.
+word_set.cpp(0621): // W217 drop ( n -- ) drop the top of data stack.
+word_set.cpp(0626): // W218 nip ( n1 n0 -- n0 ) drop the top next of data stack.
+word_set.cpp(0631): // W21a rot ( n2 n1 n0  -- n1 n0 n2 ) roll n2 to top of data stack.
+word_set.cpp(0636): // W21b roll ( ni .. n1 n0 i -- .. n1 n0 ni ) roll ni to top of data stack.
+word_set.cpp(0641): // W21c -rot ( n2 n1 n0  -- n0 n2 n1 ) back roll top of data stack to n2.
+word_set.cpp(0646): // W21d -roll ( ni .. n1 n0 i -- n0 ni .. n1 ) back roll top of data stack to ni.
+word_set.cpp(0651): // W21e 2dup ( n1 n0 -- n1 n0 n1 n0 ) copy top double-number of data stack.
+word_set.cpp(0656): // W21f 2drop ( n1 n0 -- ) drop top double-number of data stack.
+word_set.cpp(0661): // W220 2over ( n3 n2 n1 n0 -- n3 n2 n1 n0 n3 n2 ) copy top next double-number of data stack.
+word_set.cpp(0666): // W221 2swap ( n3 n2 n1 n0  -- n1 n0 n3 n2 ) swap top 2 double-numbers of data stack.
+word_set.cpp(0671): // W225 and ( a b -- a&b ) bitwise AND operation of 2 given numbers.
+word_set.cpp(0676): // W226 or ( a b -- a|b ) bitwise OR operation of 2 given numbers.
+word_set.cpp(0681): // W227 xor ( a b -- a^b ) bitwise XOR operation of 2 given numbers.
+word_set.cpp(0686): // W228 not ( n -- n^-1 ) bitwise XOR given number by -1.
+word_set.cpp(0691): // W229 0= ( n -- n==0 ) check top integer on data stack if it is 0.
+word_set.cpp(0696): // W22a 0!= ( n -- n!=0 ) check top integer on data stack if it is not 0.
+word_set.cpp(0701): // W22b 0< ( n -- n<0 ) check top integer on data stack if it is less than 0.
+word_set.cpp(0706): // W22c 0> ( n -- n>0 ) check top integer on data stack if it is greater than 0.
+word_set.cpp(0711): // W22d 0<= ( n -- n<=0 ) check top integer on data stack if it is not greater than 0.
+word_set.cpp(0716): // W22e 0>= ( n -- n>=0 ) check top integer on data stack if it is not less than 0.
+word_set.cpp(0721): // W22f = ( a b -- a==b ) check top 2 integers on data stack if they are equal.
+word_set.cpp(0726): // W230 != ( a b -- a!=b ) check top 2 integers on data stack if they are not equal.
+word_set.cpp(0731): // W231 < ( a b -- a<b ) check top 2 integers on data stack if a<b.
+word_set.cpp(0736): // W232 > ( a b -- a>b ) check top 2 integers on data stack if a>b.
+word_set.cpp(0741): // W233 <= ( a b -- a<=b ) check top 2 integers on data stack if a<=b.
+word_set.cpp(0746): // W234 >= ( a b -- a>=b ) check top 2 integers on data stack if a>=b.
+word_set.cpp(0751): // W235 $= ( nStr1 nStr2 -- flag ) check top 2 nStrs on data stack if they are equal.
+
+word_set.cpp(0756): // word set 3 ( other primitive words )
+word_set.cpp(0758): // W300 char <char> ( -- ascii ) ascii code of given char.
+word_set.cpp(0766): // W301 bl ( -- 0x20 ) ascii code of char blank.
+word_set.cpp(0770): // W302 emit ( ascii -- ) print the char of given ascii code.
+word_set.cpp(0776): // W303 print ( nStr -- ) print given nStr.
+word_set.cpp(0782): // W304 type ( addr n -- ) print string of given number of chars at given address.
+word_set.cpp(0787): // W305 word <str> ( delimiter -- nStr ) parse string by given delimiter.
+word_set.cpp(0793): // W306 token <str> ( -- nStr ) parse string by white space (length trucated at 30).
+word_set.cpp(0799): // W307 eval ( nStr -- ) evaluate given nStr.
+word_set.cpp(0804): // W308 find  ( nStr -- word ) find the forth word which name is of given nStr.
+word_set.cpp(0810): // W309 ' <name> ( -- word ) find the forth word of given name.
+word_set.cpp(0816): // W30a context ( -- lfa ) the address contain the last word defined.
+word_set.cpp(0821): // W30b ms ( n -- ) wait for n milli seconds
+word_set.cpp(0827): // W30f ." <string>" ( --  ) Print a string delimited by quote. compile only.
+word_set.cpp(0832): // W310 .( <string>) ( --  ) Print a string delimited by right parenthesis.
+word_set.cpp(0837): // W311 cr ( --  ) Print carriage return line feed.
+
+word_set.cpp(0842): // word set 4 ( tools )
+word_set.cpp(0844): // W400 words <subStr> ( -- ) show all word names including given substring.
+word_set.cpp(0851): // W401 (see) ( w -- ) see the insight of given word
+word_set.cpp(0856): // W402 see <name> ( -- ) see the word of given name
+word_set.cpp(0862): // W403 dump ( a n -- ) show n cells at given address
+word_set.cpp(0868): // W404 trace <name>  ( -- ) trace the calling sequence of give forth colon word
+word_set.cpp(0880): // W405 seeAll ( -- ) see the insight of all words defined
+word_set.cpp(0895): // W406 dir ( <path> -- ) show directory of given path
+
+word_set.cpp(0945): // word set 5 ( digital input/output forth words )
+word_set.cpp(0947): // W500 led ( -- pin  ) gpio pin number of led on back side of wb32
+word_set.cpp(0951): // W501 pinMode ( pin mode -- ) set pin as INPUT or OUTPUT
+word_set.cpp(0956): // W502 INPUT ( -- mode ) pin mode INPUT
+word_set.cpp(0960): // W503 OUTPUT ( -- mode ) pin mode OUTPUT
+word_set.cpp(0964): // W504 digitalRead ( pin -- level ) get pin level
+word_set.cpp(0969): // W505 digitalWrite ( pin level -- ) set pin to given level
+word_set.cpp(0974): // W506 HIGH ( -- level ) pin level HIGH
+word_set.cpp(0978): // W507 LOW ( -- level ) pin level LOW
+word_set.cpp(0982): // W508 output ( pin -- ) set pin mode as OUTPUT
+word_set.cpp(0987): // W509 pinOut ( pin level -- ) set pin to given level
+word_set.cpp(0992): // W50a high ( pin -- ) set pin to level HIGH
+word_set.cpp(0997): // W50b low ( pin -- ) set pin to level LOW
+word_set.cpp(1002): // W50c toggle ( pin -- ) toggle pin level
+word_set.cpp(1007): // W50d input ( pin -- ) set pin mode as INPUT
+word_set.cpp(1014): // W50e pinIn ( pin - level ) get pin level
+word_set.cpp(1028): // W600 blinks ( n -- ) blink led n times
+
+word_set.cpp(1037): // word set 7 ( color words and buttons forth words )
+word_set.cpp(1039): // W700 wbBLACK ( -- color ) color=0x0000
+word_set.cpp(1043): // W701 wbNAVY ( -- color ) color=0x0F00
+word_set.cpp(1047): // W702 wbDARKGREEN ( -- color ) color=0xE003
+word_set.cpp(1051): // W703 wbDARKCYAN ( -- color ) color=0xEF03
+word_set.cpp(1055): // W704 wbMAROON ( -- color ) color=0x0078
+word_set.cpp(1059): // W705 wbPURPLE ( -- color ) color=0x0F78
+word_set.cpp(1063): // W706 wbOLIVE ( -- color ) color=0xE07B
+word_set.cpp(1067): // W707 wbLIGHTGREY ( -- color ) color=0x18C6
+word_set.cpp(1071): // W708 wbDARKGREY ( -- color ) color=0xEF7B
+word_set.cpp(1075): // W709 wbBLUE ( -- color ) color=0x1F00
+word_set.cpp(1079): // W70a wbGREEN ( -- color ) color=0xE007
+word_set.cpp(1083): // W70b wbCYAN ( -- color ) color=0xFF07
+word_set.cpp(1087): // W70c wbRED ( -- color ) color=0x00F8
+word_set.cpp(1091): // W70d wbMAGENTA ( -- color ) color=0x1FF8
+word_set.cpp(1095): // W70e wbYELLOW ( -- color ) color=0xE0FF
+word_set.cpp(1099): // W70f wbWHITE ( -- color ) color=0xFFFF
+word_set.cpp(1103): // W710 wbORANGE ( -- color ) color=0x20FD
+word_set.cpp(1107): // W711 wbGREENYELLOW ( -- color ) color=0xE5AF
+word_set.cpp(1111): // W712 wbPINK ( -- color ) color=0x1FF8
+word_set.cpp(1115): // W713 _wbColor ( i -- color ) color of given index
+word_set.cpp(1125): // W714 btLB ( -- pin ) the Left  Blue   button
+word_set.cpp(1130): // W715 btLY ( -- pin ) the Left  Yellow button
+word_set.cpp(1135): // W716 btLR ( -- pin ) the Left  Red    button
+word_set.cpp(1140): // W717 btLG ( -- pin ) the Left  Green  button
+word_set.cpp(1145): // W718 btRB ( -- pin ) the Right Blue   button
+word_set.cpp(1150): // W719 btRY ( -- pin ) the Right Yellow button
+word_set.cpp(1155): // W71a btSTART ( -- pin ) the small  right button
+word_set.cpp(1160): // W71b btSELECT ( -- pin ) the small  left button
+word_set.cpp(1165): // W71c btPROG ( -- pin ) the small  top button on back side
+
+word_set.cpp(1174): // word set 8 ( wifiboy 32 graphics forth words )
+word_set.cpp(1178): // W800 lcdInit ( -- ) linitialize lcd
+word_set.cpp(1183): // W801 wb32_setAddrWindow ( x0 y0 x1 y1 -- ) set window rect
+word_set.cpp(1192): // W802 wb32_fillScreen ( color -- ) fill screen by given color
+word_set.cpp(1200): // W803 wb32_fillRect ( x y w h color -- ) fill rect by given color
+word_set.cpp(1210): // W804 wb32_drawPixel ( x y color -- ) at x,y draw pixel of given color
+word_set.cpp(1220): // W805 wb32_pushColor ( color -- ) push given color
+word_set.cpp(1228): // W806 wb32_drawFastVLine ( x y h color -- ) draw vertical line at x,y of hight h
+word_set.cpp(1239): // W807 wb32_drawFastHLine ( x y w color -- ) draw horizontal line at x,y of width w
+word_set.cpp(1250): // W808 wb32_drawRect ( x y w color -- ) draw rect at x,y of width w hight h
+word_set.cpp(1262): // W809 wb32_drawLine ( x0 y0 x1 y1 color w -- ) draw color line from x0,y0 to x1,y1 of width w
+word_set.cpp(1275): // W80a wb32_drawCircle ( x y r color w -- ) draw color circle at x,y of radius r width w
+word_set.cpp(1287): // W80b wb32_drawCorner ( x y r corner color w -- ) draw color corner at x,y of radius r width w
+word_set.cpp(1300): // W80c wb32_fillCircle ( x y radius cornername delta color -- ) fill circle at x,y with given radius cornername delta color
+word_set.cpp(1313): // W80d wb32_fillCircle2 ( x y radius color -- ) fill circle at x,y with given radius color
+word_set.cpp(1324): // W80e wb32_drawImage ( x y w h image -- ) draw w*h image at x,y
+word_set.cpp(1337): // W80f wb32_setTextColor ( color bgColor -- ) set color and background color for text
+word_set.cpp(1346): // W810 wb32_drawString ( str x y size type -- ) at x,y draw string of given size type 
+word_set.cpp(1358): // W811 wb32_drawChar ( uniCode x y size type -- w ) at x,y draw char of given uniCode size type, return width
+word_set.cpp(1370): // W812 wb32_color565 ( r g b -- color ) get color code of given r g b
+word_set.cpp(1380): // W813 wb32_init ( -- ) initialize graphics system
+word_set.cpp(1386): // W814 wb32_setPal8 ( i -- color ) set palette of i-th color
+word_set.cpp(1395): // W815 wb32_blit8 ( -- )
+word_set.cpp(1399): // W816 wb32_blit8 ( xs ys ws xd yd width height image -- )
+word_set.cpp(1414): // W817 wb32_rot8 ( dx dy angle scale offx offy w h sprite -- )
+word_set.cpp(1430): // W818 wb32_setBuf8 ( i d -- )
+word_set.cpp(1439): // W819 wb32_initBuf8 ( -- )
+word_set.cpp(1443): // W81a wb32_clearBuf8 ( -- )
+word_set.cpp(1447): // W81b wb32_tickerInit ( us code -- )
+word_set.cpp(1456): // W81c wb32_tickerAlarm ( us -- )
+word_set.cpp(1461): // W81d wb32_tickerEnable ( -- )
+word_set.cpp(1465): // W81e wb32_tickerDisable ( -- )
+word_set.cpp(1469): // W81f wb32_drawNString ( nStr x y size type -- ) at x,y draw string of given size type 
+word_set.cpp(1483): // W820 img ( -- img ) 128x160 color image for testing
+
+word_set.cpp(2769): // word set 9 ( extention words )
+word_set.cpp(2770): // W900 predefined ( -- w ) The last predefined word.
