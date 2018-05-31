@@ -147,9 +147,7 @@ void loop() { // this function runs over and over again forever
 直接 對外揭露程式內部的變數儲存位址, 有人會覺得很不安全, 因為違反了 Object-oriented 程式設計的原則。
 FVM 其實也是可以讓使用者自訂 檢視變數 與 更改變數 子程式作為 虛擬機 F 的指令。此範例中, 就分別定義了
 showTimes() 與 setTimes() 作為 虛擬機 F 之指令 n? 與 n! 所要執行的子程式。這樣, 我們就可隨時從 arduino
-IDE console 檢視/更改 times。例如: 從輸入格 下指令 "n?" 以檢視 led 還有幾次要閃; 下指令 "3 n!" 以設定
-led 還要閃 3 次。更有趣的是, 我們還可下一連串的指令, 例如 "n? 5 n! n? n? n? n? n?", 看到 led 閃 並且
-console 同時顯示還有幾次要閃的倒數。
+IDE console 檢視/更改 times。
 
 ```
 // example04_another_way_to_blink.ino derived from http://www.arduino.cc/en/Tutorial/Blink
@@ -185,6 +183,14 @@ void loop() { // this function runs over and over again forever
   delay(1000);                           // wait for a second
 }
 ```
+
+例如: 從輸入格 下指令 "n?" 以檢視 led 還有幾次要閃;
+![check_output](pic401_check_output.jpg)
+
+下指令 "3 n!" 以設定
+led 還要閃 3 次。更有趣的是, 我們還可下一連串的指令, 例如 "n? 5 n! n? n? n? n? n?", 看到 led 閃 並且
+console 同時顯示還有幾次要閃的倒數。
+![check_more_results](pic402_check_more_results.jpg)
 
 任何程式要讓他產生較多的變化, 直接的方法就是增加較多的變數, 用以 檢視狀態/控制效果。當這些變數
 大量增加時, 要想隨時 檢視/控制 這些變數, 自然會大大增加傳統方式 撰寫/修改 程式的 複雜度 與 困難度。
