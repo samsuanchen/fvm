@@ -92,9 +92,7 @@ void loop() { // this function runs over and over again forever
 範例02 叫 led 閃 10 次, 其中變數 times 的數值預設為 10, 是控制 led 閃 10 次的關鍵。若隨時能檢視 times 
 的數值, 就知道程式的執行進度, 知道 led 還有幾次要閃。若隨時能更改 times 的數值, 我們就能隨時叫 led 閃
 幾次了。當然, 我們可以修改程式, 在讀取 times 數值之後叫 led 閃。在此範例, 我們嘗試另類方案, 增加幾行指令, 
-啟動一個同步運行的 FVM 虛擬機 F, 並將變數 times 的儲存位址設為 虛擬機 F 的常數 n。在程式啟動 led 閃 10
-次後, 從 arduino IDE console 的輸入格, 我們就可隨時下 虛擬機 F 的指令, 例如: "n ?" 檢視 led 還有幾次要
-閃; "5 n !" 設定 led 還要閃 5 次。
+啟動一個同步運行的 FVM 虛擬機 F, 並將變數 times 的儲存位址設為 虛擬機 F 的常數 n。
 
 ```
 // example03_blink_given_number_of_times.ino derived from http://www.arduino.cc/en/Tutorial/Blink
@@ -127,6 +125,13 @@ void loop() { // this function runs over and over again forever
   delay(1000);                           // wait for a second
 }
 ```
+
+先打開 arduino IDE 的 console.
+![open_IDE_console](pic301_open_IDE_console.jpg)
+
+在程式啟動 led 閃 10
+次後, 從 arduino IDE console 的輸入格, 我們就可隨時下 虛擬機 F 的指令, 例如: "n ?" 檢視 led 還有幾次要
+閃; "5 n !" 設定 led 還要閃 5 次。
 
 ## 範例04 【另法隨時叫 led 閃幾次】 example04_another_way_to_blink.ino
 
