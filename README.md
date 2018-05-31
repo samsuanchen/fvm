@@ -129,9 +129,18 @@ void loop() { // this function runs over and over again forever
 先打開 arduino IDE 的 console.
 ![open_IDE_console](pic301_open_IDE_console.jpg)
 
-在程式啟動 led 閃 10
-次後, 從 arduino IDE console 的輸入格, 我們就可隨時下 虛擬機 F 的指令, 例如: "n ?" 檢視 led 還有幾次要
-閃; "5 n !" 設定 led 還要閃 5 次。
+編碼載入, led 開始閃, 同時 console 輸出一些訊息, 最後出現 OK。
+![console_OK](pic302_console_OK.jpg)
+
+在 led 閃 10 次後, 從 arduino IDE console 的輸入格 (左上角), 我們可隨時下 虛擬機 F 的指令,
+例如: 輸入 "n ?"。(請注意, n 與 ? 之間至少要空一格)
+![enter_check_command](pic302_enter_check_command.jpg)
+
+檢視 arduino IDE console 的輸出格, 看 led 還有幾次要閃。
+![check_output](pic303_check_output.jpg)
+
+例如: 輸入 "5 n !" (請注意, 5 與 n 以及 n 與 ! 之間都有空格), 馬上就會看到 led 又閃了 5 次。
+![enter_5_blinks_command](pic304_enter_5_blinks_command.jpg)
 
 ## 範例04 【另法隨時叫 led 閃幾次】 example04_another_way_to_blink.ino
 
