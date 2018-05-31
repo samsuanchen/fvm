@@ -26,47 +26,63 @@
 
 此程式實際上就是 arduino 所提供 led 閃不停 的範例 blink.ino。
 
-	// example01_blink_forever.ino derived from http://www.arduino.cc/en/Tutorial/Blink
+```
+// example01_blink_forever.ino derived from http://www.arduino.cc/en/Tutorial/Blink
 
-	#define LED 16                           // LED pin gpio #
+#define LED 16                           // LED pin gpio #
 
-	void setup() { // this function runs once when we press reset or power the board
-	  pinMode(LED, OUTPUT);                  // set digital pin LED as an output device.
-	}
+void setup() { // this function runs once when we press reset or power the board
+  pinMode(LED, OUTPUT);                  // set digital pin LED as an output device.
+}
 
-	void loop() { // this function runs over and over again forever
-	  digitalWrite(LED, LOW);                // turn LED on (LOW is the voltage level)
-	  delay(1000);                           // wait for a second
-	  digitalWrite(LED, HIGH);               // turn LED off by making the voltage HIGH
-	  delay(1000);                           // wait for a second
-	}
+void loop() { // this function runs over and over again forever
+  digitalWrite(LED, LOW);                // turn LED on (LOW is the voltage level)
+  delay(1000);                           // wait for a second
+  digitalWrite(LED, HIGH);               // turn LED off by making the voltage HIGH
+  delay(1000);                           // wait for a second
+}
+```
 
+打開範例, 這是所見到 arduino IDE 可能的畫面。
+![open_example01](pic100_open_example01.jpg)
+
+首次打開範例, 需要選定開發板。
+![select_module_for_your_board](pic101_select_for_your_board.jpg)
+
+還要選定 com port。
+![select_com_port](pic102_select_com_port.jpg)
+
+編碼載入, 就會看到 led 開始閃。
+![compile_and_upload](pic103_compile_and_upload)
 
 ## 範例02 【led 閃 10 次】 example02_blink_10_times.ino
 
 為增加一點變化, 我們可宣告一個 預設為 10 的 變數 times。 閃 led 前, 先檢視 times 若為 0 , 就不再閃。
-led 每閃 1 次, 變數 times 遞減 1。 閃 10 次之後, times 就會變為 0。因此, 這程式就會準確地閃 led 10 次。
+led 每閃 1 次, 變數 times 遞減 1。 閃 10 次之後, times 就會變為 0。因此, 編碼載入這程式 就會準確地
+閃 led 10 次。
 
-	// example02_blink_10_times.ino derived from http://www.arduino.cc/en/Tutorial/Blink
+```
+// example02_blink_10_times.ino derived from http://www.arduino.cc/en/Tutorial/Blink
 
-	#define LED 16                           // LED pin gpio #
+#define LED 16                           // LED pin gpio #
 
-	int times = 10;                          // ##### 1. preset to blink led 10 times
+int times = 10;                          // ##### 1. preset to blink led 10 times
 
-	void setup() { // this function runs once when we press reset or power the board
-	  pinMode(LED, OUTPUT);                  // set digital pin LED as an output device.
-	}
+void setup() { // this function runs once when we press reset or power the board
+  pinMode(LED, OUTPUT);                  // set digital pin LED as an output device.
+}
 
-	void loop() { // this function runs over and over again forever
+void loop() { // this function runs over and over again forever
 
-	  if( ! times ) return;                  // ##### 2. no more blinking if times is 0
-	  times--;                               // ##### 3. decrease times by 1
+  if( ! times ) return;                  // ##### 2. no more blinking if times is 0
+  times--;                               // ##### 3. decrease times by 1
 
-	  digitalWrite(LED, LOW);                // turn LED on (LOW is the voltage level)
-	  delay(1000);                           // wait for a second
-	  digitalWrite(LED, HIGH);               // turn LED off by making the voltage HIGH
-	  delay(1000);                           // wait for a second
-	}
+  digitalWrite(LED, LOW);                // turn LED on (LOW is the voltage level)
+  delay(1000);                           // wait for a second
+  digitalWrite(LED, HIGH);               // turn LED off by making the voltage HIGH
+  delay(1000);                           // wait for a second
+}
+```
 
 ## 範例03 【隨時叫 led 閃幾次】 example03_blink_given_number_of_times.ino
 
@@ -77,35 +93,37 @@ led 每閃 1 次, 變數 times 遞減 1。 閃 10 次之後, times 就會變為 
 次後, 從 arduino IDE console 的輸入格, 我們就可隨時下 虛擬機 F 的指令, 例如: "n ?" 檢視 led 還有幾次要
 閃; "5 n !" 設定 led 還要閃 5 次。
 
-	// example03_blink_given_number_of_times.ino derived from http://www.arduino.cc/en/Tutorial/Blink
+```
+// example03_blink_given_number_of_times.ino derived from http://www.arduino.cc/en/Tutorial/Blink
 
-	#define LED 16                           // LED pin gpio #
-	int times = 10;                          // blink led 10 times initially
+#define LED 16                           // LED pin gpio #
+int times = 10;                          // blink led 10 times initially
 
-	                                         // ##### 0. Crtl+Shift+M open Serial Port Console
+                                         // ##### 0. Crtl+Shift+M open Serial Port Console
 
-	# include <fvm01.h>                      // ##### 1. load FVM the Forth virtual machine
-	FVM F = FVM();                           // ##### 2. define F as an instence of FVM
+# include <fvm01.h>                      // ##### 1. load FVM the Forth virtual machine
+FVM F = FVM();                           // ##### 2. define F as an instence of FVM
 
-	void setup() { // this function runs once when we press reset or power the board
-	  pinMode(LED, OUTPUT);                  // initialize digital pin LED as an output device.
+void setup() { // this function runs once when we press reset or power the board
+  pinMode(LED, OUTPUT);                  // initialize digital pin LED as an output device.
 
-	  F.init( 115200 );                      // ##### 3. init virtual machine F, baud rate 115200
-	  F.newConstant( "n", (int)&times );     // ##### 4. set the address of times as the constant n in F
-	}
+  F.init( 115200 );                      // ##### 3. init virtual machine F, baud rate 115200
+  F.newConstant( "n", (int)&times );     // ##### 4. set the address of times as the constant n in F
+}
 
-	void loop() { // this function runs over and over again forever
+void loop() { // this function runs over and over again forever
 
-	  F.update();                            // ##### 5. run virtual machine F
+  F.update();                            // ##### 5. run virtual machine F
 
-	  if( ! times ) return;                  // no more blinking if times is 0
-	  times--;                               // decrease times by 1
+  if( ! times ) return;                  // no more blinking if times is 0
+  times--;                               // decrease times by 1
 
-	  digitalWrite(LED, LOW);                // turn LED on (LOW is the voltage level)
-	  delay(1000);                           // wait for a second
-	  digitalWrite(LED, HIGH);               // turn LED off by making the voltage HIGH
-	  delay(1000);                           // wait for a second
-	}
+  digitalWrite(LED, LOW);                // turn LED on (LOW is the voltage level)
+  delay(1000);                           // wait for a second
+  digitalWrite(LED, HIGH);               // turn LED off by making the voltage HIGH
+  delay(1000);                           // wait for a second
+}
+```
 
 ## 範例04 【另法隨時叫 led 閃幾次】 example04_another_way_to_blink.ino
 
@@ -116,38 +134,40 @@ IDE console 檢視/更改 times。例如: 從輸入格 下指令 "n?" 以檢視 
 led 還要閃 3 次。更有趣的是, 我們還可下一連串的指令, 例如 "n? 5 n! n? n? n? n? n?", 看到 led 閃 並且
 console 同時顯示還有幾次要閃的倒數。
 
-	// example04_another_way_to_blink.ino derived from http://www.arduino.cc/en/Tutorial/Blink
+```
+// example04_another_way_to_blink.ino derived from http://www.arduino.cc/en/Tutorial/Blink
 
-	#define LED 16                           // LED pin gpio #
-	int times = 10;                          // blink led 10 times initially
+#define LED 16                           // LED pin gpio #
+int times = 10;                          // blink led 10 times initially
 
-	                                         // ##### 0. Crtl+Shift+M open Serial Port Console
+                                         // ##### 0. Crtl+Shift+M open Serial Port Console
 
-	# include <fvm01.h>                      // ##### 1. load FVM the Forth virtual machine
-	FVM F = FVM();                           // ##### 2. define F as an instence of FVM
-	void setTimes(){ times = F.dPop(); }     // ##### 3. define  setTimes() to  set times
-	void showTimes(){ Serial.print(times); } // #####    define showTimes() to show times
+# include <fvm01.h>                      // ##### 1. load FVM the Forth virtual machine
+FVM F = FVM();                           // ##### 2. define F as an instence of FVM
+void setTimes(){ times = F.dPop(); }     // ##### 3. define  setTimes() to  set times
+void showTimes(){ Serial.print(times); } // #####    define showTimes() to show times
 
-	void setup() { // this function runs once when we press reset or power the board
-	  pinMode(LED, OUTPUT);                  // initialize digital pin LED as an output device.
+void setup() { // this function runs once when we press reset or power the board
+  pinMode(LED, OUTPUT);                  // initialize digital pin LED as an output device.
 
-	  F.init( 115200 );                      // ##### 4. init virtual machine F, baud rate 115200
-	  F.newPrimitive( "n!", setTimes );      // ##### 5. let  setTimes as the new command n! in F
-	  F.newPrimitive( "n?", showTimes);      // #####    let showTimes as the new command n? in F
-	}
+  F.init( 115200 );                      // ##### 4. init virtual machine F, baud rate 115200
+  F.newPrimitive( "n!", setTimes );      // ##### 5. let  setTimes as the new command n! in F
+  F.newPrimitive( "n?", showTimes);      // #####    let showTimes as the new command n? in F
+}
 
-	void loop() { // this function runs over and over again forever
+void loop() { // this function runs over and over again forever
 
-	  F.update();                            // ##### 6. run virtual machine F
+  F.update();                            // ##### 6. run virtual machine F
 
-	  if( ! times ) return;                  // no more blinking if times is 0
-	  times--;                               // decrease times by 1
+  if( ! times ) return;                  // no more blinking if times is 0
+  times--;                               // decrease times by 1
 
-	  digitalWrite(LED, LOW);                // turn LED on (LOW is the voltage level)
-	  delay(1000);                           // wait for a second
-	  digitalWrite(LED, HIGH);               // turn LED off by making the voltage HIGH
-	  delay(1000);                           // wait for a second
-	}
+  digitalWrite(LED, LOW);                // turn LED on (LOW is the voltage level)
+  delay(1000);                           // wait for a second
+  digitalWrite(LED, HIGH);               // turn LED off by making the voltage HIGH
+  delay(1000);                           // wait for a second
+}
+```
 
 任何程式要讓他產生較多的變化, 直接的方法就是增加較多的變數, 用以 檢視狀態/控制效果。當這些變數
 大量增加時, 要想隨時 檢視/控制 這些變數, 自然會大大增加傳統方式 撰寫/修改 程式的 複雜度 與 困難度。
