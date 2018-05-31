@@ -46,14 +46,17 @@ void loop() { // this function runs over and over again forever
 打開範例, 這是所見到 arduino IDE 可能的畫面。
 ![open_example01](pic100_open_example01.jpg)
 
-首次打開範例, 需要選定開發板。
+連上開發板, 首次打開範例, 需要選定開發板。
 ![select_module_for_your_board](pic101_select_for_your_board.jpg)
 
 還要選定 com port。
 ![select_com_port](pic102_select_com_port.jpg)
 
-編碼載入, 就會看到 led 開始閃。
+編碼載入。
 ![compile_and_upload](pic103_compile_and_upload.jpg)
+
+就會看到 led 開始閃。
+![wifiboy_esp32_blink](pic000_wifiboy_esp32_blink)
 
 ## 範例02 【led 閃 10 次】 example02_blink_10_times.ino
 
