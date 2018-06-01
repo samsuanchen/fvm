@@ -1,4 +1,4 @@
-# YAFVM -- Yet Another Forth Virtual Machine on Arduino
+# YAFVM -- Yet Another Forth Virtual Machine on Arduino -- easy to use
 ### samsuanchen@gmail.com & derek@wifiboy.org
 
 ## Abstract
@@ -9,7 +9,7 @@
 	a useful virtural machine will be activated in the same time.
 	So that, via arduino IDE console, we could enter simple commands to check, test, 
 	even change the features of the arduino code. This article is trying to
-	describe, by examples, how simple we could use this virtural machine.
+	describe, by examples, how easy we could use this virtural machine.
 
 ## 摘要
 
@@ -61,7 +61,7 @@ void loop() { // this function runs over and over again forever
 ## 範例02 【led 閃 10 次】 example02_blink_10_times.ino
 
 為增加一點變化, 我們可宣告一個 預設為 10 的 變數 times。 閃 led 前, 先檢視 times 若為 0 , 就不再閃。
-led 每閃 1 次, 變數 times 遞減 1。 閃 10 次之後, times 就會變為 0。因此, 編碼載入這程式 就會準確地
+led 每閃 1 次, 變數 times 遞減 1。 閃 10 次之後, times 就會變為 0。因此, 編碼載入, 啟動這程式 就會準確地
 閃 led 10 次。
 
 ```
@@ -129,7 +129,11 @@ void loop() { // this function runs over and over again forever
 先打開 arduino IDE 的 console.
 ![open_IDE_console](pic301_open_IDE_console.jpg)
 
-編碼載入, led 開始閃, 同時 console 輸出一些訊息, 最後出現 OK。
+請注意, console 右下角必須選定 CR, 表示我們以滑鼠點 傳送 按鈕時, 輸入字串最後
+會加上 CR (ASCII 字碼 13) 一起傳送給 虛擬機 F。這樣 虛擬機 F 才會開始 執行指令。
+![console_setup](pic302_console_setup.jpg)
+
+編碼載入, led 開始閃, 同時 console 輸出系統啟動訊息, 最後出現 OK。
 ![console_OK](pic302_console_OK.jpg)
 
 在 led 閃 10 次後, 從 arduino IDE console 的輸入格 (左上角), 我們可隨時下 虛擬機 F 的指令,
@@ -198,3 +202,38 @@ console 同時顯示還有幾次要閃的倒數。
 大量增加時, 要想隨時 檢視/控制 這些變數, 自然會大大增加傳統方式 撰寫/修改 程式的 複雜度 與 困難度。
 照所提供範例, 啟動 同步運行的 虛擬機 F, 將 變數儲存位址 設為 F 的常數 或 自訂 檢視變數 與 更改變數
 子程式作為 虛擬機 F 的指令, 即可大大簡化 撰寫/修改 程式的 複雜度 與 困難度。對入門的初學者而言尤其是這樣。
+
+
+# YAFVM -- Yet Another Forth Virtual Machine on Arduino -- many features
+### samsuanchen@gmail.com & derek@wifiboy.org
+
+## Abstract
+
+	FVM is defined by files fvm01.h and fvm01.cc. It's a 0-words virtual machine, since
+	the forth words are separately predefined in c via FVM functions in the file word_set.cc
+	or might be defined later at run time via other forth words defined.
+	5 types of forth word are incluted: constant, value, variable, colon, and primitive.
+	The structure of constant type forth word:
+	The structure of value type forth word:
+	The structure of variable type forth word:
+	The structure of colon type forth word:
+	The structure of primitive type forth word:
+
+	yet another Arduino FVM, an alternative Forth Virtual Machine on Arduino.
+	Extending a little bit to an arduino code, for example the led blinking, 
+	a useful virtural machine will be activated in the same time.
+	So that, via arduino IDE console, we could enter simple commands to check, test, 
+	even change the features of the arduino code. This article is trying to
+	describe, by examples, how easy we could use this virtural machine.
+
+## 摘要
+
+	FVM is 
+	我們嘗試, 另外提供較方便使用的的 FVM 虛擬機 版本。
+	在 arduino IDE 開啟一個正常運行的 範例程式, 例如 blink,
+	只要稍改程式, 加幾行指令, 打開 Serial Port Console,
+	程式載入同時, 一個方便的 FVM 虛擬機 就被啟動了, 
+	這 虛擬機 與原來的 範例程式 同步執行。
+	我們可隨時輸入 虛擬機 指令, 以檢視、測試、甚至改變 原來程式的功能。
+	本文將逐步說明, 以範例解說如何運用這 FVM 虛擬機。
+
